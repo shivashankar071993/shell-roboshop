@@ -60,7 +60,7 @@ unzip /tmp/catalogue.zip &>>LOG_FILE
 cd /app 
 npm install &>>LOG_FILE
 VALIDATE $? "npm install"
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp catalogue.service /etc/systemd/system/catalouge.service
 VALIDATE $? "copying catalogue service "
 
 systemctl daemon-reload
@@ -69,10 +69,10 @@ cp mongo.repo /etc/yum.repos.d/mongo.repo
 
 VALIDATE $? " copying mongo repo"
 dnf install mongodb-mongosh -y
-VALIDATE $? " installing mongodb clinet"
+VALIDATE $? "installing mongodb clinet"
 mongosh --host $MONGODB_HOST </app/db/master-data.js
 
-VALIDATE $? " Load catalogue products"
+VALIDATE $? "Load catalogue products"
 
 systemctl restart catalogue
 VALIDATE $? "restarted catalogue"
