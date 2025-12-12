@@ -10,7 +10,7 @@ N="\e[0m"
 
 USERID=$(id -u)
 
-MONGODB_HOST="mongodb.daws8s.shopp"
+MONGODB_HOST="mongodb.daws8s.shop"
 
 LOGS_FOLDER="/var/log/roboshop"
 SCRIPT_NAME=$(echo $0| cut -d "." -f1 )
