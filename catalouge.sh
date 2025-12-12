@@ -47,13 +47,13 @@ VALIDATE $?"enable node js"
 dnf install nodejs -y &>>LOG_FILE
 
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>LOG_FILE
-VALIDATE $?"useradd"
+VALIDATE $? "useradd"
 mkdir /app 
-VALIDATE $?"app directory creation"
+VALIDATE $? "app directory creation"
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
 
-VALIDATE $?"downloading to catalogue app" &>>LOG_FILE
+VALIDATE $? "downloading to catalogue app" &>>LOG_FILE
 cd /app 
 unzip /tmp/catalogue.zip &>>LOG_FILE
 
