@@ -55,6 +55,7 @@ VALIDATE $? "useradd"
 
 else 
 echo "already user add"
+fi
 
 mkdir -p /app 
 VALIDATE $? "app directory creation"
