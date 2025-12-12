@@ -63,6 +63,8 @@ curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue
 
 VALIDATE $? "downloading to catalogue app" 
 cd /app 
+rm -rf /app/*
+VALIDATE $? "cleaning everthing in app directory"
 unzip /tmp/catalogue.zip &>>LOG_FILE
 
 cd /app 
