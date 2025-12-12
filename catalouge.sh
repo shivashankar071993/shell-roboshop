@@ -53,10 +53,10 @@ if [ $? -ne 0] then
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>LOG_FILE
 VALIDATE $? "useradd"
 
-echo "already user add"
 else 
+echo "already user add"
 
-mkdir /app 
+mkdir -p /app 
 VALIDATE $? "app directory creation"
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
