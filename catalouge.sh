@@ -70,7 +70,7 @@ unzip /tmp/catalogue.zip &>>LOG_FILE
 cd /app 
 npm install &>>LOG_FILE
 VALIDATE $? "npm install"
-cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalouge.service
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "copying catalogue service "
 
 systemctl daemon-reload
