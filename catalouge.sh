@@ -78,9 +78,9 @@ VALIDATE $? " demon reaload"
 cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 
 VALIDATE $? " copying mongo repo"
-dnf install mongodb-mongosh -y
+dnf install mongodb-mongosh -y &>>LOG_FILE
 VALIDATE $? "installing mongodb clinet"
-mongosh --host $MONGODB_HOST </app/db/master-data.js
+mongosh --host $MONGODB_HOST </app/db/master-data.js &>>LOG_FILE
 
 VALIDATE $? "Load catalogue products"
 
