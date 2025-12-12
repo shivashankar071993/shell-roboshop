@@ -39,13 +39,13 @@ VALIDATE(){
 
     fi
 }
-dnf module disable nodejs -y &>>LOG_FILE
+dnf module disable nodejs -y &>>$LOG_FILE
 VALIDATE $? "DISABLING NODE JS"
 
-dnf module enable nodejs:20 -y &>>LOG_FILE
+dnf module enable nodejs:20 -y &>>$LOG_FILE
 VALIDATE $? "enable node js" 
 
-dnf install nodejs -y &>>LOG_FILE
+dnf install nodejs -y &>>$LOG_FILE
 
 id=roboshop
 
@@ -65,10 +65,10 @@ VALIDATE $? "downloading to catalogue app"
 cd /app 
 rm -rf /app/*
 VALIDATE $? "cleaning everthing in app directory"
-unzip /tmp/catalogue.zip &>>LOG_FILE
+unzip /tmp/catalogue.zip &>>$LOG_FILE
 
 cd /app 
-npm install &>>LOG_FILE
+npm install &>>$LOG_FILE
 VALIDATE $? "npm install"
 cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "copying catalogue service "
@@ -78,9 +78,9 @@ VALIDATE $? " demon reaload"
 cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 
 VALIDATE $? " copying mongo repo"
-dnf install mongodb-mongosh -y &>>LOG_FILE
+dnf install mongodb-mongosh -y  &>>$LOG_FILE
 VALIDATE $? "installing mongodb clinet"
-mongosh --host $MONGODB_HOST </app/db/master-data.js &>>LOG_FILE
+mongosh --host $MONGODB_HOST </app/db/master-data.js & >>$LOG_FILE
 
 VALIDATE $? "Load catalogue products"
 
