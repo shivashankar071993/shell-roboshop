@@ -101,15 +101,10 @@ VALIDATE $? "Loading databases3"
 else 
     "shipping already loaded $Y skipping $N"
 
-systemctl restart shipping
+systemctl restart shipping &>>$LOG_FILE
 VALIDATE $? "Restarting shipping"
 
 
 End_time=$(date +%s)
 TOTAL_TIME=$(($End_time - $start_time))
-echo -e "script execution time in : $Y $TOTAL_TIME Seconds $N"
-
-
-
-
-
+echo -e "script execution time in : $Y $TOTAL_TIME Seconds $N "
