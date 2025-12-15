@@ -69,7 +69,7 @@ cd /app
 mvn clean package &>>$LOG_FILE
 mv target/shipping-1.0.jar shipping.jar 
 
-cp $SCRIPT_DIR/cartshipping.service /etc/systemd/system/cart.service
+cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
 
 VALIDATE $? "copying shipping service "
 
@@ -105,7 +105,9 @@ systemctl restart shipping
 VALIDATE $? "Restarting shipping"
 
 
-
+End_time=$(date +%s)
+TOTAL_TIME=$(($End_time - $start_time))
+echo -e "script execution time in : $Y $TOTAL_TIME Seconds $N"
 
 
 
