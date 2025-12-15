@@ -19,6 +19,7 @@ SCRIPT_DIR=$PWD
 
 mkdir -p $LOGS_FOLDER
 echo "SCRIPT started executing $(date)" | tee -a $LOG_FILE 
+start_time=$(date +%s)
 
 USERID=$(id -u)
 
@@ -47,9 +48,9 @@ VALIDATE $? "enable node js"
 
 dnf install nodejs -y &>>$LOG_FILE
 
-id=roboshop
 
-start_time=$(date +%s)
+
+id=roboshop
 
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>LOG_FILE
