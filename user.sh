@@ -49,7 +49,9 @@ dnf install nodejs -y &>>$LOG_FILE
 
 id=roboshop
 
-if [ $? -ne 0]; then
+start_time=$(date +%s)
+
+if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>LOG_FILE
     VALIDATE $? "useradd"
 else 
@@ -75,3 +77,7 @@ VALIDATE $? "copying user service "
 
 systemctl restart user
 VALIDATE $? "restarted user"
+
+End_time=$(date +%s)
+TOTAL_TIME=$(($End_time - $start_time))
+echo -e "script execution time in : $Y $TOTAL_TIME Seconds $N"
