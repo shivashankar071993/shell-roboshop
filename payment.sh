@@ -44,10 +44,10 @@ VALIDATE(){
 dnf install python3 gcc python3-devel -y
 VALIDATE $? "installing Python"
 
-id roboshop &>>LOG_FILE
+id roboshop &>>$LOG_FILE 
 
 if [ $? -ne 0 ]; then
-    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>LOG_FILE
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
     VALIDATE $? "useradd"
 else 
 echo "already user adde"
@@ -56,7 +56,7 @@ fi
 mkdir -p /app 
 VALIDATE $? "app directory creation"
 
-curl -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip  &>>LOG_FILE 
+curl -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip  &>>$LOG_FILE 
 
 VALIDATE $? "downloading to payment  app" 
 cd /app 
@@ -65,7 +65,7 @@ VALIDATE $? "cleaning everthing in app directory"
 unzip /tmp/payment.zip &>>$LOG_FILE
 
 cd /app 
-pip3 install -r requirements.txt
+pip3 install -r requirements.txt &>>$LOG_FILE 
 
 VALIDATE $? "Adding depedencies"
  
