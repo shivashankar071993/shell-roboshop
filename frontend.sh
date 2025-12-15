@@ -66,5 +66,8 @@ unzip /tmp/frontend.zip
 
 rm -rf /etc/nginx/nginx.conf
 
-cp $FILE_DIR/ngix.conf /etc/nginx/nginx.conf
-VALIDATE $? "copying the files in nginx conf"
+cp $FILE_DIR/nginx.conf /etc/nginx/nginx.conf
+VALIDATE $? "copying the files in nginx conf" 
+
+systemctl restart nginx 
+VALIDATE $? "restart  nginx"
