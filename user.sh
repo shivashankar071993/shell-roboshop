@@ -76,6 +76,9 @@ VALIDATE $? "npm install"
 cp $SCRIPT_DIR/user.service /etc/systemd/system/user.service
 VALIDATE $? "copying user service "
 
+systemctl daemon-reload
+VALIDATE $? "daemon-reload "
+
 systemctl restart user
 VALIDATE $? "restarted user"
 
