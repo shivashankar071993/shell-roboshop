@@ -81,11 +81,11 @@ VALIDATE $? "enabling shipping"
 systemctl start shipping
 VALIDATE $? "starting shipping"
 
-dnf install mysql -y 
+dnf install mysql -y &>>$LOG_FILE
 
 VALIDATE $? "connecting mysql server"
 
-mysql -h mysql.daws8s.shop -uroot -pRoboShop@1 -e 'use cities' &>>$LOG_FILE
+    mysql -h mysql.daws8s.shop -uroot -pRoboShop@1 -e 'use cities' &>>$LOG_FILE
 
 if [ $? -ne 0 ]; then 
 
@@ -94,7 +94,7 @@ mysql -h mysql.daws8s.shop  -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_F
 mysql -h mysql.daws8s.shop  -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
 
 else 
-    "shipping already loaded $Y skipping $N"
+   echo -e  "shipping already loaded $Y skipping $N"
 
 systemctl restart shipping &>>$LOG_FILE
 VALIDATE $? "Restarting shipping"
