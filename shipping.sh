@@ -82,7 +82,6 @@ systemctl start shipping
 VALIDATE $? "starting shipping"
 
 dnf install mysql -y &>>$LOG_FILE
-
 VALIDATE $? "connecting mysql server"
 
     mysql -h mysql.daws8s.shop -uroot -pRoboShop@1 -e 'use cities' &>>$LOG_FILE
@@ -95,6 +94,7 @@ mysql -h mysql.daws8s.shop  -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LO
 
 else 
    echo -e  "shipping already loaded $Y skipping $N"
+fi
 
 systemctl restart shipping &>>$LOG_FILE
 VALIDATE $? "Restarting shipping"
