@@ -24,7 +24,7 @@ USERID=$(id -u)
 
 date &>>$LOG_FILE
 
-start_time= (date+%s)
+start_time=$(date+%s)
 
 if [ $USERID -ne 0 ] ; then
 echo " Please run with root user else will not work"
@@ -64,8 +64,8 @@ VALIDATE $? "enabling redis"
 systemctl start redis >&&$LOG_FILE
 VALIDATE $? "starting redis" 
 
-End_time= (date+%s)
+End_time=$(date+%s)
 
 TOTAL_TIME=$(($End_time - $start_time))
 
-echo -e "script execution time in : $Y $TOTAL_TIME "
+echo -e "script execution time in : $Y $TOTAL_TIME Seconds $N"
