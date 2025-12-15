@@ -18,12 +18,12 @@ LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 SCRIPT_DIR=$PWD
 
 mkdir -p $LOGS_FOLDER
+
+date &>>$LOG_FILE
 echo "SCRIPT started executing $(date)" | tee -a $LOG_FILE 
 start_time=$(date +%s)
 
 USERID=$(id -u)
-
-date &>>$LOG_FILE
 
 if [ $USERID -ne 0 ] ; then
 echo " Please run with root user else will not work"
@@ -50,7 +50,7 @@ dnf install nodejs -y &>>$LOG_FILE
 
 
 
-id=roboshop
+id roboshop
 
 if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>LOG_FILE
