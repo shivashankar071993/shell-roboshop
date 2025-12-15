@@ -12,6 +12,8 @@ USERID=$(id -u)
 
 MONGODB_HOST="mongodb.daws8s.shop"
 
+SCRIPT_DIR=$PWD
+
 LOGS_FOLDER="/var/log/roboshop"
 SCRIPT_NAME=$(echo $0| cut -d "." -f1 )
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
@@ -42,18 +44,22 @@ VALIDATE(){
     fi
 }
 
+cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+VALIDATE $? "Copiying repo"
 
-dnf install mysql-server -y &>>$LOG_FILE
+dnf install rabbitmq-server -y  &>>$LOG_FILE
+VALIDATE $? "installing Rabbit mq"
 
-VALIDATE $? "Insatlling mysql"
+systemctl enable rabbitmq-server  &>>$LOG_FILE
+VALIDATE $? "enabling Rabbit mq"
 
-systemctl enable mysqld &>>$LOG_FILE
-VALIDATE $? "enabling mysql"
-systemctl start mysqld  &>>$LOG_FILE
-VALIDATE $? "starting  mysql"
+systemctl start rabbitmq-server  &>>$LOG_FILE
+VALIDATE $? "staring Rabbit mq"
 
-mysql_secure_installation --set-root-pass RoboShop@1 &>>$LOG_FILE
-VALIDATE $? "setting root password"
+rabbitmqctl add_user roboshop roboshop123
+VALIDATE $? "adding user"
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+VALIDATE $? "setting permissions"
 
 End_time=$(date +%s)
 TOTAL_TIME=$(($End_time - $start_time))
